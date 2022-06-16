@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		96BB176C28588616001D74BC /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BB176B28588616001D74BC /* WebService.swift */; };
 		96BB176F28589E66001D74BC /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BB176D28589E66001D74BC /* SecondViewController.swift */; };
+		96BD51FF285B146B00FB5B91 /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BD51FE285B146B00FB5B91 /* Webservice.swift */; };
 		96E2CF1B2856CF0D003A49F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E2CF1A2856CF0D003A49F5 /* AppDelegate.swift */; };
 		96E2CF1D2856CF0D003A49F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E2CF1C2856CF0D003A49F5 /* SceneDelegate.swift */; };
 		96E2CF1F2856CF0D003A49F5 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E2CF1E2856CF0D003A49F5 /* HomeController.swift */; };
@@ -20,8 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		96BB176B28588616001D74BC /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		96BB176D28589E66001D74BC /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		96BD51FE285B146B00FB5B91 /* Webservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
 		96E2CF172856CF0D003A49F5 /* wanted_pre_onboarding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wanted_pre_onboarding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E2CF1A2856CF0D003A49F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96E2CF1C2856CF0D003A49F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,12 +45,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		96BB176A28588604001D74BC /* Service */ = {
+		96BD51FD285B145500FB5B91 /* Webservice */ = {
 			isa = PBXGroup;
 			children = (
-				96BB176B28588616001D74BC /* WebService.swift */,
+				96BD51FE285B146B00FB5B91 /* Webservice.swift */,
 			);
-			path = Service;
+			path = Webservice;
 			sourceTree = "<group>";
 		};
 		96E2CF0E2856CF0D003A49F5 = {
@@ -72,7 +72,7 @@
 		96E2CF192856CF0D003A49F5 /* wanted_pre_onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				96BB176A28588604001D74BC /* Service */,
+				96BD51FD285B145500FB5B91 /* Webservice */,
 				96E2CF2E2856CF45003A49F5 /* Model */,
 				96E2CF2F2856CF4E003A49F5 /* View */,
 				96E2CF302856CF5A003A49F5 /* Controller */,
@@ -183,7 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96E2CF3B2856FBBF003A49F5 /* WeatherResponse.swift in Sources */,
-				96BB176C28588616001D74BC /* WebService.swift in Sources */,
+				96BD51FF285B146B00FB5B91 /* Webservice.swift in Sources */,
 				96E2CF1F2856CF0D003A49F5 /* HomeController.swift in Sources */,
 				96E2CF372856DBF5003A49F5 /* WeatherCell.swift in Sources */,
 				96BB176F28589E66001D74BC /* SecondViewController.swift in Sources */,

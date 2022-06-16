@@ -8,6 +8,7 @@ import Foundation
 import UIKit
 
 struct WeatherResponse: Decodable {
+    let name: String
     let weather: [Weather]
     let main: Main
     let wind: Wind
@@ -16,6 +17,7 @@ struct WeatherResponse: Decodable {
         case weather = "weather"
         case main = "main"
         case wind = "wind"
+        case name = "name"
     }
     
     struct Weather: Decodable{
