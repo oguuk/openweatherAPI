@@ -1,0 +1,44 @@
+/* 
+  Localizable.strings
+  wanted_pre_onboarding
+
+  Created by 오국원 on 2022/06/18.
+*/
+
+"Gongju" = "공주";
+"Gwangju" = "광주";
+"Gumi" = "구미";
+"Gunsan" = "군산";
+"Daegu" = "대구";
+"Daejeon" = "대전";
+"Mokpo" = "목포";
+"Busan" = "부산";
+"Seosan" = "서산";
+"Seosan City" = "서산";
+"Seoul" = "서울";
+"Sokcho" = "속초";
+"Suwon" = "수원";
+"Suwon-si" = "수원";
+"Suncheon" = "순천";
+"Ulsan" = "울산";
+"Iksan" = "익산";
+"Jeonju" = "전주";
+"Jeju" = "제주";
+"Jeju City" = "제주";
+"Cheonan" = "천안";
+"Cheongju" = "청주";
+"Cheongju-si" = "청주";
+"Chuncheon" = "춘천";
+
+"clear sky" = "맑은 하늘";
+"few clouds" = "다소 구름";
+"scattered clouds" = "흩어져있는 구름";
+"broken clouds" = "부서진 구름";
+"shower rain" = "소나기";
+"rain" = "비";
+"thunderstorm" = "뇌우";
+"snow" = "눈";
+"mist" = "안개";
+"thunderstorm with light rain" = "뇌우와 약간의 비";
+"overcast clouds" = "흐린 구름";
+"light rain" = "다소 비";

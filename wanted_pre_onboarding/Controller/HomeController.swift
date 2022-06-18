@@ -26,14 +26,14 @@ class HomeController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        for city in cities{
-            for name in city{
-                Webservice.shared.getData(city: name) { result in
-                    self.data[name] = result
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
+        Webservice.shared.getData() { result in
+            switch result{
+            case .success(let weatherInfos) :
+                self.data = weatherInfos
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
                 }
+            case .failure(_): break
             }
         }
     }
@@ -72,13 +72,12 @@ extension HomeController {
         let cityName = cities[indexPath.section][indexPath.row]
         let dataOfCity = data[cityName]
         
-        Webservice.shared.getImage(imageName: dataOfCity?.weather.first?.icon ?? "") { image in
-            cell.weatherIcon.image = image
+        if let data = dataOfCity{
+            cell.weatherIcon.image = data.image
+            cell.cityNameLabel.text = String(format: NSLocalizedString(data.name, comment: "cityName"))
+            cell.temperatureNameLabel.text = "🌡 \(Int((dataOfCity?.main.temp)! - 273))°C"
+            cell.humidityLabel.text = "💧 \(data.main.humidity)%"
         }
-        
-        cell.cityNameLabel.text = cityName
-        cell.temperatureNameLabel.text = "\(Int(((dataOfCity?.main.temp) ?? 0) - 273))°C"
-        cell.humidityLabel.text = "\((dataOfCity?.main.humidity) ?? 0)%"
         
         return cell
     }

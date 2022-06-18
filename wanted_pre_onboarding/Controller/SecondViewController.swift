@@ -27,11 +27,11 @@ class SecondViewController: UIViewController {
         super.viewDidLoad()
         
         if let data = data {
-            cityName.text = data.name
-            Webservice.shared.getImage(imageName: data.weather.first?.icon ?? "") { image in
-                self.icon.image = image
-            }
-            descrip.text = data.weather.first?.description
+            cityName.text = String(format: NSLocalizedString(data.name, comment: "cityName"))
+
+            icon.image = data.image
+
+            descrip.text = String(format: NSLocalizedString(data.weather.first!.description,comment: "descrip"))
             
             arrayOfTemperature.append("\(round((data.main.temp) - 273))°C")
             arrayOfTemperature.append("\(round((data.main.feels_like) - 273))°C")

@@ -12,6 +12,7 @@ struct WeatherResponse: Decodable {
     let weather: [Weather]
     let main: Main
     let wind: Wind
+    var image: UIImage?
 
     private enum CodingKeys:String, CodingKey{
         case weather = "weather"
