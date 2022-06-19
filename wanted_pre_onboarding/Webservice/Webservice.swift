@@ -8,12 +8,16 @@
 import UIKit
 
 class Webservice {
+    
+    //MARK: -singleton
     static let shared = Webservice()
     
+    //MARK: -Cache
     private let cache = NSCache<NSString,UIImage>()
     
     private init() {}
     
+    //MARK: -APIs
     public func getData(completion: @escaping (Result<[String:WeatherResponse],Error>) -> ()){
         
         var WeatherData = [String:WeatherResponse]()
@@ -53,19 +57,13 @@ class Webservice {
             return
         }
         
-        guard let url = URL(string: urlString) else {
-            return
-        }
+        guard let url = URL(string: urlString) else { return }
         
         let _ = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
-            guard let data = data, error == nil else {
-                return
-            }
+            guard let data = data, error == nil else { return }
             
             DispatchQueue.main.async {
-                guard let image = UIImage(data: data) else {
-                    return
-                }
+                guard let image = UIImage(data: data) else { return }
                 
                 self?.cache.setObject(image, forKey: imageName as NSString)
                 completion(.success(image))

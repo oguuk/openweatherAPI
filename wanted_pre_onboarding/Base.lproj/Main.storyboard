@@ -31,7 +31,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="MQ6-lb-WUJ">
-                                            <rect key="frame" x="194" y="0.0" width="200" height="100"/>
+                                            <rect key="frame" x="199" y="0.0" width="200" height="100"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="elc-ah-llH">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="100"/>
@@ -67,7 +67,7 @@
                                         <constraint firstItem="MQ6-lb-WUJ" firstAttribute="centerY" secondItem="O31-Jg-bWC" secondAttribute="centerY" id="0vf-6G-mfN"/>
                                         <constraint firstItem="YiA-vH-OwB" firstAttribute="leading" secondItem="O31-Jg-bWC" secondAttribute="leadingMargin" constant="10" id="MGW-M8-pCH"/>
                                         <constraint firstItem="YiA-vH-OwB" firstAttribute="top" secondItem="O31-Jg-bWC" secondAttribute="topMargin" constant="25.5" id="QpK-Gb-NaC"/>
-                                        <constraint firstAttribute="trailing" secondItem="MQ6-lb-WUJ" secondAttribute="trailing" constant="20" id="m7D-r0-y2P"/>
+                                        <constraint firstAttribute="trailing" secondItem="MQ6-lb-WUJ" secondAttribute="trailing" constant="15" id="m7D-r0-y2P"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -83,7 +83,22 @@
                             <outlet property="delegate" destination="cqd-PN-VNY" id="gua-8y-8GT"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="pre_onboarding" id="3Pr-nh-HJE"/>
+                    <navigationItem key="navigationItem" title="pre_onboarding" id="3Pr-nh-HJE">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="E8I-Df-xQT">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="wef-pn-eK9">
+                                <rect key="frame" x="302" y="5" width="92" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="reload"/>
+                                <connections>
+                                    <action selector="reloadButtonClicked:" destination="cqd-PN-VNY" eventType="touchUpInside" id="Pmk-zF-ehP"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <action selector="reloadButtonClicked:" destination="cqd-PN-VNY" id="j4x-aR-P3A"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ctz-VG-Ald" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

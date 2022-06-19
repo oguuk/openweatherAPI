@@ -25,7 +25,12 @@ class HomeController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        callWebserviceAPIs()
+    }
+    
+    //MARK: -Helpers
+    func callWebserviceAPIs(){
+
         Webservice.shared.getData() { result in
             switch result{
             case .success(let weatherInfos) :
@@ -33,13 +38,19 @@ class HomeController: UITableViewController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
+                
             case .failure(_): break
             }
         }
     }
+    
+    //MARK: -IBAction
+    @IBAction func reloadButtonClicked(_ sender: Any) {
+        callWebserviceAPIs()
+    }
 }
 
-
+//MARK: -TableViewController
 extension HomeController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return titles[section]
@@ -70,12 +81,11 @@ extension HomeController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: WeatherCellIdentifier, for: indexPath) as? WeatherCell else { return UITableViewCell() }
         
         let cityName = cities[indexPath.section][indexPath.row]
-        let dataOfCity = data[cityName]
         
-        if let data = dataOfCity{
+        if let data = data[cityName]{
             cell.weatherIcon.image = data.image
             cell.cityNameLabel.text = String(format: NSLocalizedString(data.name, comment: "cityName"))
-            cell.temperatureNameLabel.text = "🌡 \(Int((dataOfCity?.main.temp)! - 273))°C"
+            cell.temperatureNameLabel.text = "🌡 \(Int(data.main.temp - 273))°C"
             cell.humidityLabel.text = "💧 \(data.main.humidity)%"
         }
         

@@ -6,7 +6,7 @@
 ### 첫 번째 화면
 
 ---
-
+<img height="600" width="384" alt="스크린샷 2022-06-19 오후 12 36 06" src="https://user-images.githubusercontent.com/75964073/174464693-fc05f4a1-56fe-49e4-a863-8d8b2844b0a9.png">
 - 아래 각 도시의 현재 날씨를 화면에 표시합니다.
     - 필수로 포함해야 하는 정보
         - 도시이름, 날씨 아이콘, 현재기온, 현재습도
@@ -19,68 +19,65 @@
 ### 두 번째 화면
 
 ---
-
+<img height="600" width="406" alt="스크린샷 2022-06-19 오후 12 48 45" src="https://user-images.githubusercontent.com/75964073/174464706-688e0f13-7c87-46e9-9035-6a8c978c0880.png">
 - 첫 번째 화면에서 선택한 도시의 현재 날씨 상세 정보를 표현합니다
     - 필수로 포함해야 하는 정보
         - 도시이름, 날씨 아이콘, 현재기온, 체감기온, 헌재습도, 최저기온, 최고기온, 기압, 풍속, 날씨설명
 - 날씨 아이콘 이미지를 불러올땐 캐시를 활용합니다.
     - 캐시된 정보가 있다면 캐시된 이미지를 활용합니다.
     - 캐시된 정보가 없다면 API로부터 이미지를 받아옵니다.
-## 프로젝트 설명 
-국내에서 실 디바이스에 배포 시 현재 유저의 위치를 확인하고 위치의 날씨를 확인할 수 있으며 주요 20개의 도시의 현재 날씨를 확인할 수 있습니다.
 
-또한 내가 마지막으로 조회한 시간을 확인할 수 있고 재조회를 통해 모든 정보를 최신화할 수 있습니다.
+
+## 프로젝트 설명 
+사용한 컴포넌트: TableView, StackView, UIButton
+
+navigationBar 오른쪽에 reload 버튼을 추가하여 날씨 정보를 실시간으로 받아올 수 있게 하였습니다.
+
+단일 열 안에 행을 사용하여 데이터를 나타내기 위해 TableView를 사용하였고 "가나다"순으로 지역을 배치하기 위해 미리 정해둔 정적 데이터인 titles, numberOfCities, cities Array의 인덱스를 사용하여 테이블 셀 안에 지역이름, 날씨아이콘, 기온, 습도를 표시하였습니다.
+
+셀을 클릭하면 접근성을 편하게 하기 위해 상세 정보 페이지를 modal로 나타내었으며 포함해야 하는 정보들이 나타납니다. 기온, 습도, 기압 등 날씨의 value를 가진 키값들을 가지고 있는 arrayOfTemperature의 이전, 이후 인덱스로 이동할 수 있는 left, right UIButton을 사용하여 해당 날씨 정보를 나타내도록 하였습니다.이렇게한 이유는 사용자 입장에서 귀찮을 수 있지만 정신없이 나열하기 보다는 한 정보를 한번에 출력하고 싶었기 때문입니다.
+
 
 ## 디자인 패턴
 
-MVVM 패턴
+MVC 패턴
 
-## 위치정보 및 날씨 정보 가져오기
 
-Open Weather의 API를 사용하여 20개의 주요 도시의 날씨 정보를 가져오도록 하고 모든 정보를 불러온 이후 Icon 값에 따라 이미지를 다운로드 받도록 하였습니다.
+## HomeController
 
-또한 국내에서 실 디바이스에 배포 시 현주소를 Naver Rever Segeocode API를 통해 확인하여 현 사용자 주소 정보를 가져오도록 하였고
-Open Weather의 API를 사용하여 사용자의 날씨 정보 또한 가져올 수 있도록 처리하였습니다.
+<img width="384" alt="스크린샷 2022-06-19 오후 12 36 06" src="https://user-images.githubusercontent.com/75964073/174464742-7b338806-65bd-4aa5-8737-5d50bff4b930.png">
 
-이를 순서대로 하기 위하여 escaping closure를 사용하여 Call back 받은 이후 차례대로 작업을 수행하도록 하였습니다.
+날씨 정보를 담는 data입니다. key 값은 해당 지역의 이름으로 설정하였고 value는 데이터를 나타낸 Model인 WeatherResponse타입을 받도록 하였습니다.
+(셀이 재사용되면서 이전 셀에서 셋팅한 이미지가 남아있는 문제가 발생하지 않도록 하기 위해 prepareForeReuse를 사용하여 이미지뷰의 이비지를 초기화하는 과정을 거쳤습니다.)
 
-## App Icon 및 런치 스크린 설정
+<img width="389" alt="스크린샷 2022-06-19 오후 12 36 01" src="https://user-images.githubusercontent.com/75964073/174464733-10664945-2737-42b1-9fcd-c3a66b425e31.png">
 
-![KakaoTalk_Photo_2022-06-15-22-35-30 002](https://user-images.githubusercontent.com/66667091/173840608-71e9cb15-7fea-4894-b6e7-f534ce443010.jpeg)
+openWeatherAPI의 데이터를 가져오는 함수입니다. 호출되는 위치는 View가 뿌려지고 데이터를 가져오는데 시간을 조금이라도 줄이기 위해 ViewWillAppear와 reload 버튼에 호출하도록 하였습니다.
+처음에는 data를 빠르게 가져오기 위해 각 tableCell 별로 쓰레드를 사용하여 값을 가져오고 reloaData하도록 하였지만 이렇게 하면 처음에 스크롤 하기 전 cell들의 image가 보이지 않는 오류가 발생해  Webservice의 escaping closure를 모든 cell의 작업이 끝나고 call back을 받고난 뒤 reload하도록 변경하였습니다.  
 
-프리온보딩 iOS 심볼 이미지를 사용하여 App Icon과 Launch Screen을 꾸며 보았습니다.
 
-## 로딩 페이지
+## SecondViewController
+<img width="619" alt="스크린샷 2022-06-19 오후 12 48 41" src="https://user-images.githubusercontent.com/75964073/174465059-04cf4918-fbf1-4c44-8aa8-962456d93629.png">
+HomeController에서 cell을 클릭하고 data를 받는 data 변수와 버튼 가운데에 있는 지금 무엇을 나타내는지에 대한 label을 표현해주는 arrayOfWhatLabel과 같은 크기와 인덱스를 가지는 arrayOfTemperature 배열입니다.
 
-![KakaoTalk_Photo_2022-06-15-22-35-30 001](https://user-images.githubusercontent.com/66667091/173840882-447ed893-2ae5-4fb0-bad4-ada8c4046bbc.jpeg)
+<img width="406" alt="스크린샷 2022-06-19 오후 12 48 45" src="https://user-images.githubusercontent.com/75964073/174465100-8e8f986b-a7e1-476e-9063-3614c4ca98d6.png">
 
-API 통신이 완료되고 이미지 다운로드가 완료되어 모든 데이터가 바인딩 된 이후 로딩 페이지가 사라지도록 하였습니다.
+localizing을 위해 NSLocalizedString을 사용하였으며 각 label마다 해당하는 데이터를 할당하였습니다.
 
-## 메인페이지
+<img width="406" alt="스크린샷 2022-06-19 오후 12 48 45" src="https://user-images.githubusercontent.com/75964073/174465137-1da7456e-b081-4f43-bc4e-f4a21ab027e2.png">
+누르면 arrayOfWhatLabel와 arrayOfTemperature의 index를 1씩 올려주어 데이터를 변경시켜주는 rightButtonClick IBAction 함수와 반대로 index를 -1해주다가 음수가 되면 다시 마지막 index로 이동하는 leftButtonClick 함수입니다.   
 
-![KakaoTalk_Photo_2022-06-15-22-35-30 004](https://user-images.githubusercontent.com/66667091/173840991-d96e116f-bd60-4e99-acfb-b633e6781608.jpeg)
 
-상단에 최근 조회한 시간을 확인할 수 있으며 재조회 버튼을 통해 날씨 정보를 최신화할 수 있습니다.
+## Webservice
+<img width="272" alt="스크린샷 2022-06-19 오후 12 48 09" src="https://user-images.githubusercontent.com/75964073/174465176-2b4f91ac-b93e-4848-bf5e-c6aa3029a06e.png">
+<img width="362" alt="스크린샷 2022-06-19 오후 12 48 11" src="https://user-images.githubusercontent.com/75964073/174465184-c5ea37f9-dc03-4e01-8806-bb08963be693.png">
 
-가운데에는 사용자의 위치 주소 및 날씨 정보가 표시됩니다. 클릭 시 날씨 상세 정보 페이지로 Modal이 나타나게 됩니다.
+싱글턴 객체와 만들어서 메모리 낭비 방지하였고, cache를 만들어 image를 재사용하기 위해 로컬 캐시를 만들었습니다.
 
-하단에는 주요 도시 20개의 이름과 날씨 정보 온도 / 습도를 표시하도록 하였으며 모든 정보를 보기 쉽도록 horizontal 방향으로 이동하도록 하였습니다.
+<img width="893" alt="스크린샷 2022-06-19 오후 12 48 16" src="https://user-images.githubusercontent.com/75964073/174465236-af035c4c-33af-4201-bf54-f6bdbaf6e8f2.png">
+<img width="697" alt="스크린샷 2022-06-19 오후 12 48 22" src="https://user-images.githubusercontent.com/75964073/174465311-63709186-55cb-44c8-a06c-c0468e86d92a.png">
+   
+cell 단위로 작업을 끝내지 않기 위해 WeatherData 딕셔너리를 선언하고 completion에 Result 타입을 사용하여 보다 직관적으로 success와 failure 나누어 코드를 작성하였습니다.
+API 호출 후 completion closure 내부에서 강한순환참조가 발생하여 [weak self]를 써주어 strong reference cycle이 발생하지 않도록 하였습니다.  
 
-Cell 클릭 시 날씨 상세 정보 페이지로 Modal이 나타나게 됩니다.
-
-## 날씨 상세 페이지 이동
-
-![KakaoTalk_Photo_2022-06-15-22-35-30 003](https://user-images.githubusercontent.com/66667091/173840746-ef40d850-0c90-497b-a324-aa491b92fa3c.jpeg)
-
-NavgationController보다는 페이지가 2개뿐이기 때문에 사용자가 Modal나타나게하여 빠르게 확인하고 다시 메인 화면으로 돌아올 수 있도록 하기 위해 모달을 사용하여 페이지 이동하였습니다.
-
-그리고 요구사항대로 도시 이름, 날씨 아이콘, 현재가 온, 체감기온, 헌재 습도, 최저기온, 최고기온, 기압, 풍속, 날씨 설명을 표시하였습니다.
-
-## MVC에서 MVVM으로 변경
-
-MVC 방식으로 프로젝트를 완성한 이후 MVVM패턴으로 바꾸고 싶었습니다. 그래서 다른 교육자료를 참조하여 부족하지만 MVVM패턴을 사용하여 코드를 리팩토링해 보았습니다.
-
-## 아쉬운점
-
-CollectionView의 Scroll 방식을 페이징 방식으로 하고 싶었지만, UI 관련된 세부 지식이 부족하여 구현해내지 못하였습니다. 하지만 이를 외부 라이브러리 없이 적용하고 싶습니다.
-
+이미지의 경우 캐시를 먼저 확인하고 해당 데이터가 없다면 받아오도록 하였습니다.
